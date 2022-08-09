@@ -1,5 +1,8 @@
+import { useCallback } from "react";
 import Auth from "../components/Auth";
 
 export default function AuthContainer() {
-    return <Auth />;
+    const login = useCallback((reqData: any) => {}, []);
+
+    return <Auth login={login} />;
 }
