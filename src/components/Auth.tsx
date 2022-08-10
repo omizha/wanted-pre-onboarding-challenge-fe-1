@@ -1,34 +1,40 @@
 import { useCallback, useRef } from "react";
-
-interface LoginReqType {
-    email: string;
-    password: string;
-}
+import { isValidatedEmail } from "../features/auth/validate/isValidatedEmail";
+import { isValidatedPassword } from "../features/auth/validate/isValidatedPassword";
 
 interface AuthProps {
-    login: (reqData: LoginReqType) => void;
+    onLogin: (email: string, password: string) => void;
+    onSignUp: (email: string, password: string) => void;
 }
 
-const Auth: React.FC<AuthProps> = ({ login }) => {
-    const emailRef = useRef<any>();
-    const passwordRef = useRef<any>();
+const Auth: React.FC<AuthProps> = ({ onLogin, onSignUp }) => {
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
-    const onClick = useCallback(() => {
-        const email: string = emailRef.current!.state.value;
-        const password: string = passwordRef.current!.state.value;
+    const onLoginClick = useCallback(() => {
+        const email: string = emailRef.current!.value;
+        const password: string = passwordRef.current!.value;
 
-        // 예외 처리
         switch (true) {
-            // 이메일 조건
-            case !email.includes("@"):
-            case !email.includes("."):
-            case !(email.length > 0):
-            // 비밀번호 조건 (@eslint-disable-next-line no-fallthrough)
-            case !(password.length >= 8):
+            case !isValidatedEmail(email):
+            case !isValidatedPassword(password):
                 return;
         }
 
-        login({ email, password });
+        onLogin(email, password);
+    }, []);
+
+    const onSingUpClick = useCallback(() => {
+        const email: string = emailRef.current!.value;
+        const password: string = passwordRef.current!.value;
+
+        switch (true) {
+            case !isValidatedEmail(email):
+            case !isValidatedPassword(password):
+                return;
+        }
+
+        onSignUp(email, password);
     }, []);
 
     return (
@@ -45,15 +51,20 @@ const Auth: React.FC<AuthProps> = ({ login }) => {
             <div>
                 <input
                     type="password"
-                    name="email"
+                    name="password"
                     id="password"
-                    placeholder="이메일"
+                    placeholder="비밀번호"
                     ref={passwordRef}
                 />
             </div>
             <div>
-                <button type="submit" onClick={onClick}>
-                    제출
+                <button type="submit" onClick={onLoginClick}>
+                    로그인
+                </button>
+            </div>
+            <div>
+                <button type="submit" onClick={onSingUpClick}>
+                    회원가입
                 </button>
             </div>
         </div>

@@ -1,8 +1,41 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { PostUsersCreate } from "../apis/users/PostUsersCreate";
+import { PostUsersLogin } from "../apis/users/PostUsersLogin";
 import Auth from "../components/Auth";
+import { setToken, useTokenStore } from "../features/auth/useTokenStore";
 
 export default function AuthContainer() {
-    const login = useCallback((reqData: any) => {}, []);
+    const { isValidToken } = useTokenStore();
 
-    return <Auth login={login} />;
+    useEffect(() => {
+        if (isValidToken()) {
+            window.location.href = "/";
+        }
+    }, [isValidToken]);
+
+    const onLogin = useCallback((email: string, password: string) => {
+        PostUsersLogin({ email, password })
+            .then(({ token }) => {
+                setToken(token);
+                window.location.href = "/";
+            })
+            .catch(() => {
+                setToken(null);
+                alert("로그인에 실패했습니다.");
+            });
+    }, []);
+
+    const onSignUp = useCallback((email: string, password: string) => {
+        PostUsersCreate({ email, password })
+            .then(({ token }) => {
+                setToken(token);
+                window.location.href = "/";
+            })
+            .catch(() => {
+                setToken(null);
+                alert("계정생성에 실패했습니다.");
+            });
+    }, []);
+
+    return <Auth onLogin={onLogin} onSignUp={onSignUp} />;
 }
