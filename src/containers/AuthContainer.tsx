@@ -1,17 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { PostUsersCreate } from "../apis/users/PostUsersCreate";
 import { PostUsersLogin } from "../apis/users/PostUsersLogin";
 import Auth from "../components/Auth";
 import { useTokenStore } from "../features/auth/useTokenStore";
 
 export default function AuthContainer() {
-    const { isValidToken, setToken } = useTokenStore();
-
-    useEffect(() => {
-        if (isValidToken()) {
-            window.location.href = "/";
-        }
-    }, [isValidToken]);
+    const { setToken } = useTokenStore();
 
     const onLogin = useCallback(
         (email: string, password: string) => {

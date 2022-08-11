@@ -22,7 +22,7 @@ const Auth: React.FC<AuthProps> = ({ onLogin, onSignUp }) => {
         }
 
         onLogin(email, password);
-    }, []);
+    }, [onLogin]);
 
     const onSingUpClick = useCallback(() => {
         const email: string = emailRef.current!.value;
@@ -35,7 +35,7 @@ const Auth: React.FC<AuthProps> = ({ onLogin, onSignUp }) => {
         }
 
         onSignUp(email, password);
-    }, []);
+    }, [onSignUp]);
 
     return (
         <div>

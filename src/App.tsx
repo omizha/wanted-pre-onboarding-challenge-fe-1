@@ -1,9 +1,9 @@
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Auth from "./pages/Auth";
+import Auth from "./pages/AuthPage";
 import Error from "./pages/Error";
-import Home from "./pages/Home";
+import Todo from "./pages/TodoPage";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         <ErrorBoundary FallbackComponent={Error}>
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Todo} />
                     <Route exact path="/auth" component={Auth} />
                     <Route component={NotFound} />
                 </Switch>
@@ -20,4 +20,4 @@ function App() {
     );
 }
 
-export default App();
+export default App;
