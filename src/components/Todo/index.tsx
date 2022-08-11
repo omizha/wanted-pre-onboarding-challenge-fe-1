@@ -1,13 +1,10 @@
 import React from "react";
+import Calendar from "./Calendar";
 
 interface TodoProps {}
 
 const Todo: React.FC<TodoProps> = (props) => {
-    return (
-        <div>
-            <h1>Todo</h1>
-        </div>
-    );
+    return <Calendar />;
 };
 
 export default Todo;

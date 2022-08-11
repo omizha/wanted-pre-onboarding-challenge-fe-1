@@ -49,13 +49,15 @@ const Modal: React.FC<Props> = ({ children, isOpen, onClose, selector }) => {
             unmountOnExit
         >
             {isOpen ? (
-                <Portal selector={selector}>
+                <Portal selector={selector || "modal-root"}>
                     <Overlay>
                         <Dim onClick={onClose} />
                         <Container>{children}</Container>
                     </Overlay>
                 </Portal>
-            ) : null}
+            ) : (
+                <></>
+            )}
         </CSSTransition>
     );
 };
