@@ -2,8 +2,11 @@ import create from "zustand";
 import { devtools, subscribeWithSelector, persist } from "zustand/middleware";
 import { isValidatedToken } from "./validate/isValidatedToken";
 
+type TokenType = string | null;
+
 interface TokenState {
-    token: string | null;
+    token: TokenType;
+    setToken: (token: TokenType) => void;
     isValidToken: () => boolean;
 }
 
@@ -13,6 +16,7 @@ export const useTokenStore = create<TokenState>()(
             persist(
                 (set, get) => ({
                     token: null,
+                    setToken: (token) => set({ token }),
                     isValidToken: () => {
                         return isValidatedToken(get().token);
                     },
@@ -25,7 +29,3 @@ export const useTokenStore = create<TokenState>()(
         )
     )
 );
-
-export const setToken = (token: string | null) => (set: any) => {
-    set(() => ({ token }));
-};

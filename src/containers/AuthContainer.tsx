@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { PostUsersCreate } from "../apis/users/PostUsersCreate";
 import { PostUsersLogin } from "../apis/users/PostUsersLogin";
 import Auth from "../components/Auth";
-import { setToken, useTokenStore } from "../features/auth/useTokenStore";
+import { useTokenStore } from "../features/auth/useTokenStore";
 
 export default function AuthContainer() {
-    const { isValidToken } = useTokenStore();
+    const { isValidToken, setToken } = useTokenStore();
 
     useEffect(() => {
         if (isValidToken()) {
@@ -13,29 +13,35 @@ export default function AuthContainer() {
         }
     }, [isValidToken]);
 
-    const onLogin = useCallback((email: string, password: string) => {
-        PostUsersLogin({ email, password })
-            .then(({ token }) => {
-                setToken(token);
-                window.location.href = "/";
-            })
-            .catch(() => {
-                setToken(null);
-                alert("로그인에 실패했습니다.");
-            });
-    }, []);
+    const onLogin = useCallback(
+        (email: string, password: string) => {
+            PostUsersLogin({ email, password })
+                .then(({ token }) => {
+                    setToken(token);
+                    window.location.href = "/";
+                })
+                .catch(() => {
+                    setToken(null);
+                    alert("로그인에 실패했습니다.");
+                });
+        },
+        [setToken]
+    );
 
-    const onSignUp = useCallback((email: string, password: string) => {
-        PostUsersCreate({ email, password })
-            .then(({ token }) => {
-                setToken(token);
-                window.location.href = "/";
-            })
-            .catch(() => {
-                setToken(null);
-                alert("계정생성에 실패했습니다.");
-            });
-    }, []);
+    const onSignUp = useCallback(
+        (email: string, password: string) => {
+            PostUsersCreate({ email, password })
+                .then(({ token }) => {
+                    setToken(token);
+                    window.location.href = "/";
+                })
+                .catch(() => {
+                    setToken(null);
+                    alert("계정생성에 실패했습니다.");
+                });
+        },
+        [setToken]
+    );
 
     return <Auth onLogin={onLogin} onSignUp={onSignUp} />;
 }
