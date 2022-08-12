@@ -39,14 +39,14 @@ interface CalendarDayProps {
 
 const CalendarDay: React.FC<CalendarDayProps> = ({ date }) => {
     const {
-        todoList,
         selectedDate,
+        getFilteredTodoList,
         setSelectedDate,
         setOpenTodoFormModal,
         setOpenTodoStatisticsModal,
     } = useTodoStore((state) => ({
-        todoList: state.todoList,
         selectedDate: state.selectedDate,
+        getFilteredTodoList: state.getFilteredTodoList,
         setSelectedDate: state.setSelectedDate,
         setOpenTodoFormModal: state.setIsOpenTodoFormModal,
         setOpenTodoStatisticsModal: state.setIsOpenTodoStatisticsModal,
@@ -54,12 +54,17 @@ const CalendarDay: React.FC<CalendarDayProps> = ({ date }) => {
 
     const today = useMemo(() => new Date(), []);
 
+    const filteredTodoList = useMemo(
+        () => getFilteredTodoList(date),
+        [date, getFilteredTodoList]
+    );
+
     const handleOpenTodoFormModal = useCallback(
         (d: number) => {
             setSelectedDate(new Date(selectedDate.setDate(d)));
             setOpenTodoFormModal(true);
         },
-        [selectedDate, setOpenTodoFormModal, setSelectedDate]
+        [selectedDate, setSelectedDate, setOpenTodoFormModal]
     );
 
     const handleSelectDate = useCallback(
@@ -90,7 +95,7 @@ const CalendarDay: React.FC<CalendarDayProps> = ({ date }) => {
                 >
                     {date.getDate()}
                 </DisplayDate>
-                <TodoList items={todoList} />
+                <TodoList items={filteredTodoList} />
             </Container>
         </TableData>
     );

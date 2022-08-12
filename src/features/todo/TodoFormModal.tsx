@@ -12,7 +12,7 @@ const ModalBody = styled.div`
     padding: 8px; ;
 `;
 
-const Date = styled.small`
+const TodoDate = styled.small`
     display: block;
     color: #c9c8cc;
 `;
@@ -35,7 +35,7 @@ const Card = styled.div`
     padding: 24px;
     box-sizing: border-box;
     background-color: #19181a;
-    ${Date} + ${InputTodo} {
+    ${TodoDate} + ${InputTodo} {
         margin-top: 24px;
     }
 `;
@@ -69,7 +69,7 @@ const TodoFormModal: React.FC<TodoFormModalProps> = (props) => {
             id: uuidV4(),
             content,
             done: false,
-            date: selectedDate,
+            date: new Date(selectedDate),
         };
         addTodo(newTodo);
     }, [content, selectedDate, addTodo]);
@@ -96,7 +96,7 @@ const TodoFormModal: React.FC<TodoFormModalProps> = (props) => {
         <Modal isOpen={isOpen} onClose={handleClose}>
             <ModalBody>
                 <Card>
-                    <Date>{getSimpleDateFormat(selectedDate)}</Date>
+                    <TodoDate>{getSimpleDateFormat(selectedDate)}</TodoDate>
                     <InputTodo
                         placeholder="새로운 이벤트"
                         onKeyPress={handleKeyPress}

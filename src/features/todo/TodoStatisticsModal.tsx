@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled/macro";
 import { HiOutlineTrash } from "react-icons/hi";
 
 import Modal from "../../components/Todo/Modal";
-import { useState } from "react";
-import { useCallback } from "react";
-import useTodoStore from "./useTodoStore";
-import { useMemo } from "react";
+import useTodoStore, { Todo } from "./useTodoStore";
 
 const ModalBody = styled.div`
     width: 100vw;
@@ -92,14 +89,14 @@ const TodoStatisticsModal: React.FC<TodoStatisticsModalProps> = () => {
         removeTodo: state.removeTodo,
     }));
 
-    const statistics = useMemo(
-        () => getStatistics(selectedDate),
-        [selectedDate, getStatistics]
-    );
+    const statistics = getStatistics(selectedDate);
+    const filteredTodoList = getFilteredTodoList(selectedDate);
 
-    const filteredTodoList = useMemo(
-        () => getFilteredTodoList(selectedDate),
-        [selectedDate, getFilteredTodoList]
+    const handleRemoveTodo = useCallback(
+        (todo: Todo) => {
+            removeTodo(todo.id);
+        },
+        [removeTodo]
     );
 
     const handleClose = useCallback(() => {
@@ -121,7 +118,7 @@ const TodoStatisticsModal: React.FC<TodoStatisticsModalProps> = () => {
                                 <TodoActions>
                                     <TodoActionButton
                                         secondary
-                                        onClick={() => removeTodo(todo.id)}
+                                        onClick={() => handleRemoveTodo(todo)}
                                     >
                                         <HiOutlineTrash />
                                     </TodoActionButton>
