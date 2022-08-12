@@ -31,11 +31,15 @@ const useTodoStore = create<TodoState>()(
             todoList: [],
             addTodo: (newTodo) => {
                 const todoList = get().todoList;
-                set({ todoList: [...todoList, newTodo] });
+                set({ todoList: [...todoList, newTodo] }, false, "addTodo");
             },
             removeTodo: (id) => {
                 const todoList = get().todoList;
-                set({ todoList: todoList.filter((todo) => todo.id !== id) });
+                set(
+                    { todoList: todoList.filter((todo) => todo.id !== id) },
+                    false,
+                    "removeTodo"
+                );
             },
             getFilteredTodoList: (date) => {
                 return get().todoList.filter((todo) =>
@@ -54,15 +58,28 @@ const useTodoStore = create<TodoState>()(
             },
             selectedDate: new Date(),
             selectedTodo: null,
-            setSelectedDate: (date) => set({ selectedDate: date }),
-            setSelectedTodo: (todo) => set({ selectedTodo: todo }),
+            setSelectedDate: (date) =>
+                set({ selectedDate: date }, false, "setSelectedDate"),
+            setSelectedTodo: (todo) =>
+                set({ selectedTodo: todo }, false, "setSelectedTodo"),
             isOpenTodoFormModal: false,
             isOpenTodoStatisticsModal: false,
             setIsOpenTodoFormModal: (isOpen) =>
-                set({ isOpenTodoFormModal: isOpen }),
+                set(
+                    { isOpenTodoFormModal: isOpen },
+                    false,
+                    "setIsOpenTodoFormModal"
+                ),
             setIsOpenTodoStatisticsModal: (isOpen) =>
-                set({ isOpenTodoStatisticsModal: isOpen }),
-        }))
+                set(
+                    { isOpenTodoStatisticsModal: isOpen },
+                    false,
+                    "setIsOpenTodoStatisticsModal"
+                ),
+        })),
+        {
+            name: "TodoStore",
+        }
     )
 );
 
