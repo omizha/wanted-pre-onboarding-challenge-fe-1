@@ -2,7 +2,7 @@
 
 ## 기술스택
 
- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)   ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)       ![Zustand](https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=zustand&logoColor=%2361DAFB)
+ ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)                    ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)                        ![Zustand](https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=zustand&logoColor=%2361DAFB)
 
 ## 실행 화면
 
@@ -13,6 +13,22 @@
 ### Todo List
 
  ![Todo](https://raw.githubusercontent.com/omizha/wanted-pre-onboarding-challenge-fe-1/master/docs/Todo.webp)
+
+## 개발환경 설정 & 실행
+
+
+1. Git 설치
+2. Node LTS 설치
+3. Server Project 설치 및 실행
+   * `git clone https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api`
+   * 프로젝트 디렉토리에서 다음 명령어로 node_modules 설치 : `npm install`
+   * 프로젝트에서 `npm start` 명령어 입력
+4. Client Project 설치
+   * `git clone https://github.com/omizha/wanted-pre-onboarding-challenge-fe-1`
+   * 프로젝트 디렉토리에서 다음 명령어로 node_modules 설치 : `npm install`
+5. Client Project 시작
+   * 프로젝트에서 `npm start` 명령어 입력
+   * 브라우저에서 <http://localhost:3000> 링크를 클릭하여 시작
 
 ## 클라이언트 구현 과제 안내
 
@@ -52,3 +68,55 @@
 ### API
 
 참고 : https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api
+
+## 폴더 구조
+
+```bash
++---public
+\---src
+    +---apis
+    |   +---todos
+    |   \---users
+    +---components
+    |   \---Todo
+    +---containers
+    +---features
+    |   +---auth
+    |   |   \---validate
+    |   \---todo
+    +---pages
+    \---utils
+```
+
+## README 작성 및 코드 정리
+
+- [ ] 최종 구현 화면 이미지 / 동영상으로 제공
+
+  화면을 어떤 구조로 구성했는지에 대한 설명
+
+  라우트나 기능별로 구분하여 제공
+- [ ] 설치, 환경설정 및 실행 방법
+
+  프로젝트 실행 시 필요한 환경 세팅 확인 (script, port, env, …)
+- [x] 구현 요구 사항 목록
+
+  체크 리스트 형태로 추가
+- [ ] 사용한 프레임워크 및 라이브러리 설명
+
+  package.json 참조하여 선택한 이유 작성
+- [ ] 폴더 구조 설명
+
+  폴더를 구분한 기준에 대하여 설명
+
+  tree 명령어를 사용하면 간편하게 디렉토리 구조를 출력할 수 있음
+- [ ] 과제 진행 시 주안점 작성
+
+  고민한 부분에 대하여 서술
+- [ ] 한계점 및 개선 사항 작성
+
+  고려는 하였으나 실제 구현하지 못한 부분에 대하여 서술
+- [ ] console.log, 불필요한 주석 제거
+- [ ] 구현 요구 사항에 맞게 실제 동작하는지 전수 테스트
+- [ ] 설명이 필요한 코드에는 JSDoc 어노테이션을 사용해서 설명 추가
+
+
