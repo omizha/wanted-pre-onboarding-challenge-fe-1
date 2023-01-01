@@ -6757,6 +6757,11 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-omizha@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-omizha/-/eslint-config-omizha-0.4.0.tgz#2b3d95693f96b387e1855d70d3f0f186d784c17f"
+  integrity sha512-PRBsgFYGnU/xxNzBxn2Ik20n6C8lwJPwilxdBzFlTOCSqK6/OZ9k4SpjIIqwPIJi2GD9rxSt6H68tHtWFuYYtw==
+
 eslint-config-react-app@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-7.0.1.tgz#73ba3929978001c5c86274c017ea57eb5fa644b4"
