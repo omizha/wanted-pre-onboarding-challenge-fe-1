@@ -76,6 +76,9 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.13.1",
     "eslint-config-omizha": "^0.4.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.1",
     "prop-types": "^15.8.1",
     "webpack": "^5.75.0"
   }
