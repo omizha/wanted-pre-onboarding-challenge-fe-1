@@ -13,7 +13,7 @@ const useBreakpoint = () => {
      * 0px ~ 799px
      */
     isMobile: !isDesktop,
-  }
-}
+  };
+};
 
 export default useBreakpoint;

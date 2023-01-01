@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import MediaQuery from 'react-responsive'
+import type { ReactNode } from 'react';
+import MediaQuery from 'react-responsive';
 
 const ShowDesktop = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
@@ -7,7 +7,7 @@ const ShowDesktop = ({ children }: { children: ReactNode }): JSX.Element => {
       {children}
       {null}
     </MediaQuery>
-  )
-}
+  );
+};
 
 export default ShowDesktop;
