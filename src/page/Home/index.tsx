@@ -1,32 +1,55 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { Container } from 'src/component';
 import { faker } from '@faker-js/faker/locale/ko';
 import TodoTable from './TodoTable';
+import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
+import { Store } from 'src/store';
+import { Link } from 'react-router-dom';
 
-const Todos = Array.from({ length: 50 }).map(() => {
+const createTodoMock = () => {
   return {
-    id: faker.datatype.uuid(),
     title: faker.lorem.sentence(),
+    content: faker.lorem.paragraph(),
+    id: faker.datatype.uuid(),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),
-    deletedAt: undefined,
-    content: faker.lorem.paragraph(),
-    isDone: faker.datatype.boolean(),
   };
-});
+};
 
 const Home = () => {
+  const todos = useRecoilValue(Store.todos);
+
+  const onClickAddItem = useRecoilCallback(
+    ({ set }) =>
+      () => {
+        set(Store.todos, (prev) => [...prev, createTodoMock()]);
+      },
+    [],
+  );
+
+  const onClickRemoveItem = useRecoilCallback(
+    ({ set }) =>
+      (id: string) => {
+        set(Store.todos, (prev) => prev.filter((todo) => todo.id !== id));
+      },
+    [],
+  );
+
   return (
     <Container>
       <h1>To-do List</h1>
-      <button type="button">추가</button>
+      <button onClick={onClickAddItem} type="button">
+        추가
+      </button>
       <TodoTable>
-        {Todos.map((todo) => {
+        {todos.map((todo) => {
           return (
             <TodoWrap key={todo.id}>
-              <TodoTitle>{todo.title}</TodoTitle>
-              <input type="checkbox" checked={todo.isDone} />
-              <button type="button">삭제</button>
+              <TodoTitle to={`/${todo.id}`}>{todo.title}</TodoTitle>
+              <button type="button" onClick={() => onClickRemoveItem(todo.id)}>
+                삭제
+              </button>
             </TodoWrap>
           );
         })}
@@ -37,11 +60,11 @@ const Home = () => {
 
 const TodoWrap = styled.div({
   display: 'grid',
-  gridTemplateColumns: '1fr 50px 50px',
+  gridTemplateColumns: '1fr 50px',
   gap: '16px',
 });
 
-const TodoTitle = styled.h2({
+const TodoTitle = styled(Link)({
   // 한줄만 보이게
   overflow: 'hidden',
   textOverflow: 'ellipsis',
