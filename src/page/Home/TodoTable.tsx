@@ -10,14 +10,16 @@ const TodoTable = ({ children }: Props) => {
 
 const Wrap = styled.div({
   display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'stretch',
   width: '100%',
   height: '100%',
   background: 'gray',
   overflowX: 'hidden',
   overflowY: 'scroll',
   padding: '16px',
-  flexDirection: 'column',
   borderRadius: '8px',
+  boxSizing: 'border-box',
 });
 
 const Header = styled.div({

@@ -1,18 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { Container } from 'src/component';
-import { Store } from 'src/store';
+import useTodoStore from 'src/store/useTodoStore';
 
 const TodoDetail = () => {
   const { id } = useParams();
-  const todos = useRecoilValue(Store.todos);
+  const todos = useTodoStore((state) => state.todos);
   const todo = todos.find((todo) => todo.id === id);
 
   return (
-    <Container>
+    <>
       <h1>{todo?.title}</h1>
       <p>{todo?.content}</p>
-    </Container>
+    </>
   );
 };
 

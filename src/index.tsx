@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ErrorBoundary } from 'react-error-boundary';
-import { RecoilRoot } from 'recoil';
 import Page from './page';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,9 +11,7 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary fallback={<div />}>
       <Suspense fallback={<div />}>
-        <RecoilRoot>
-          <Page />
-        </RecoilRoot>
+        <Page />
       </Suspense>
     </ErrorBoundary>
   </React.StrictMode>,

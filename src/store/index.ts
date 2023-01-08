@@ -1,1 +1,1 @@
-export * as Store from './store';
+export * as Store from './useTodoStore';
