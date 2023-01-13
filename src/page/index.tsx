@@ -8,6 +8,7 @@ const Page = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/auth" element={<Auth />} />
+        <Route path="/auth/create" element={<Auth />} />
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<Home />} />
       </Routes>
