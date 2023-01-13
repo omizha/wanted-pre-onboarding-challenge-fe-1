@@ -3,8 +3,11 @@ import styled from '@emotion/styled';
 import { Container } from 'src/component';
 import TodoDetail from './TodoDetail';
 import TodoList from './TodoList';
+import { useParams } from 'react-router-dom';
 
 const Home = () => {
+  const { id } = useParams();
+
   return (
     <Container>
       <Grid>
@@ -12,7 +15,7 @@ const Home = () => {
           <TodoList />
         </Row>
         <Row>
-          <TodoDetail />
+          <TodoDetail key={id} />
         </Row>
       </Grid>
     </Container>
